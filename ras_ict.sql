@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 11, 2023 at 10:11 AM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.2.0
+-- Generation Time: Aug 23, 2024 at 10:01 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,55 +24,77 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `message`
+-- Table structure for table `problem_categories`
 --
 
-CREATE TABLE `message` (
-  `ID` int(11) NOT NULL,
-  `senderName` varchar(50) NOT NULL,
-  `Time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `Message` varchar(500) NOT NULL
+CREATE TABLE `problem_categories` (
+  `id` int(11) NOT NULL,
+  `category_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `problem_categories`
+--
+
+INSERT INTO `problem_categories` (`id`, `category_name`) VALUES
+(1, 'Hardware issue'),
+(2, 'Software issue'),
+(3, 'Network issue');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `post_news`
+-- Table structure for table `problem_reports`
 --
 
-CREATE TABLE `post_news` (
-  `ID` int(11) NOT NULL,
-  `Time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `Post_News` varchar(200) NOT NULL
+CREATE TABLE `problem_reports` (
+  `id` int(11) NOT NULL,
+  `staff_name` varchar(255) NOT NULL,
+  `department` varchar(255) NOT NULL,
+  `device_name` varchar(255) NOT NULL,
+  `problem_category` varchar(255) NOT NULL,
+  `problem_description` text NOT NULL,
+  `report_date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `tips`
+-- Dumping data for table `problem_reports`
 --
 
-CREATE TABLE `tips` (
-  `ID` int(11) NOT NULL,
-  `Time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `Content` varchar(500) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
+INSERT INTO `problem_reports` (`id`, `staff_name`, `department`, `device_name`, `problem_category`, `problem_description`, `report_date`) VALUES
+(1, 'yozam', 'ict', 'printer', 'Network issue', 'doesnt print', '2024-08-23 07:59:24');
 
 --
--- Table structure for table `user`
+-- Indexes for dumped tables
 --
 
-CREATE TABLE `user` (
-  `ID` int(11) NOT NULL,
-  `userName` int(11) NOT NULL,
-  `OfficeName` varchar(40) DEFAULT NULL,
-  `Email` varchar(40) NOT NULL,
-  `MobileNumber` int(11) NOT NULL,
-  `Password` varchar(255) NOT NULL,
-  `Role` varchar(10) NOT NULL DEFAULT 'Normal'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+--
+-- Indexes for table `problem_categories`
+--
+ALTER TABLE `problem_categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `problem_reports`
+--
+ALTER TABLE `problem_reports`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `problem_categories`
+--
+ALTER TABLE `problem_categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `problem_reports`
+--
+ALTER TABLE `problem_reports`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
