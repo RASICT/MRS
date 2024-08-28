@@ -1,5 +1,18 @@
 <?php
+// problems.php
+
+// Start the session
 session_start();
+
+// Check if the user is logged in, if not redirect to login page
+if (!isset($_SESSION['username'])) {
+    header("Location: index.php"); // Redirect to login page
+    exit();
+}
+
+// Your page content here
+
+
 include 'conn.php'; // Include your database connection
 
 // Initialize variables
@@ -209,6 +222,11 @@ body {
               <svg class="nav-icon">
                 <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-pencil"></use>
               </svg><span data-coreui-i18n="typography">About</span></a></li> 
+
+              <li class="nav-item"><a class="nav-link" href="index.php">
+              <svg class="nav-icon">
+                <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-pencil"></use>
+              </svg><span data-coreui-i18n="typography">Logout</span></a></li> 
          
        
     </div> 
